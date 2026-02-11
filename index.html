@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Настюшка-опасность • 20 лет</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Montserrat', sans-serif;
+  color:white;
+  text-align:center;
+  overflow:hidden;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+
+  background: linear-gradient(135deg,#ff00cc,#6a00ff,#00eaff);
+  background-size:400% 400%;
+  animation:bg 10s infinite alternate;
+}
+
+@keyframes bg{
+  0%{background-position:left;}
+  100%{background-position:right;}
+}
+
+/* глиттер */
+.sparkle{
+  position:fixed;
+  width:4px;
+  height:4px;
+  background:white;
+  border-radius:50%;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  from{transform:translateY(-10vh);}
+  to{transform:translateY(110vh);}
+}
+
+.card{
+  background:rgba(0,0,0,0.65);
+  backdrop-filter: blur(12px);
+  padding:25px;
+  border-radius:25px;
+  width:92%;
+  max-width:420px;
+  box-shadow:0 0 40px #ff00cc;
+  z-index:2;
+}
+
+h1{
+  font-size:24px;
+  text-shadow:0 0 15px #ff00cc;
+}
+
+.age{
+  font-size:64px;
+  font-weight:900;
+  color:#ff00cc;
+  text-shadow:0 0 25px #ff00cc;
+}
+
+.info{font-size:14px;margin:5px 0;}
+
+.timer{
+  margin:10px 0;
+  font-weight:700;
+  text-shadow:0 0 10px cyan;
+}
+
+/* кнопки */
+.btn{
+  display:block;
+  margin:8px auto;
+  padding:12px 20px;
+  border-radius:20px;
+  background:#ff00cc;
+  color:white;
+  text-decoration:none;
+  font-weight:700;
+  width:80%;
+  box-shadow:0 0 20px #ff00cc;
+}
+
+.gif{
+  width:80px;
+  margin:6px;
+  border-radius:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <h1>⚡ Настюшка-опасность ⚡</h1>
+  <div class="age">20</div>
+
+  <p>Приглашаю тебя на мой день рождения 💖</p>
+
+  <div class="info">📅 20.02 • 18:00</div>
+  <div class="info">📍 Черкасская 137</div>
+  <div class="info">Подъезд 2 • Домофон 158 • 16 этаж</div>
+
+  <div class="timer" id="timer"></div>
+
+  <p style="font-size:13px;color:#ffd6ff;">
+    💿 Празднуем в стиле 2016 года<br>
+    👕 Одеваемся как в 2016<br>
+    😈 Если ничего не сможете — приносите настроение
+  </p>
+
+  <!-- гифки -->
+  <div>
+    <img class="gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+    <img class="gif" src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif">
+    <img class="gif" src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif">
+  </div>
+
+  <a class="btn" href="https://maps.google.com/?q=Черкасская+137" target="_blank">
+    📍 Открыть карту
+  </a>
+
+  <button class="btn" onclick="toggleMusic()">🎵 Включить музыку</button>
+
+  <button class="btn" onclick="coming()">💖 Я приду!</button>
+
+</div>
+
+<!-- музыка (можно заменить ссылку) -->
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3">
+</audio>
+
+<script>
+/* таймер */
+const partyDate = new Date("2026-02-20T18:00:00");
+
+function updateTimer(){
+  const diff = partyDate - new Date();
+  if(diff <= 0){
+    timer.innerHTML = "🎉 Уже тусим!";
+    return;
+  }
+
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor(diff/3600000)%24;
+  const m=Math.floor(diff/60000)%60;
+  const s=Math.floor(diff/1000)%60;
+
+  timer.innerHTML = `⏳ До тусовки: ${d}д ${h}ч ${m}м ${s}с`;
+}
+setInterval(updateTimer,1000);
+updateTimer();
+
+/* музыка */
+function toggleMusic(){
+  const music=document.getElementById("music");
+  music.paused ? music.play() : music.pause();
+}
+
+/* кнопка "приду" */
+function coming(){
+  alert("Урааа! Ждём тебя на тусе 😈💖");
+}
+
+/* глиттер */
+for(let i=0;i<90;i++){
+  const s=document.createElement("div");
+  s.className="sparkle";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=(3+Math.random()*6)+"s";
+  document.body.appendChild(s);
+}
+</script>
+
+</body>
+</html>
